@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\Admin\AttendanceController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ReportController;
+use App\Http\Controllers\Admin\StaffController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
@@ -35,21 +38,35 @@ Route::group(['prefix' => 'login', 'middleware' => 'loginmiddleware', 'as'=> 'lo
 Route::prefix('admin')->name('admin.')->group(function ()
 {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-
-    Route::get('/attendance', function() {return view('admin.attendance');})->name('attendance');
-
-    Route::get('/report', function() {return view('admin.report');})->name('report');
+    Route::get('/dashboard', [DashboardController::class, 'index']);
 
     Route::group(['prefix' => 'staff', 'as'=> 'staff.'], function () {
-        Route::get('/', function() {return view('admin.staff');})->name('list');
-        Route::get('/add', function() {return view('admin.add-staff');})->name('add');
-        Route::post('/add', function() {return "Dang xu ly";})->name('p_add');
+        Route::get('/', [StaffController::class, 'index'])->name('list');
+        Route::get('/add', [StaffController::class, 'add'])->name('add');
+        Route::post('/add', [StaffController::class, 'actionAdd'])->name('p_add');
+
+        Route::get('/add', [StaffController::class, 'add'])->name('add');
+        Route::post('/add', [StaffController::class, 'actionAdd'])->name('p_add');
+
+        Route::get('/edit/{id}', [StaffController::class, 'add'])->name('edit');
+        Route::post('/edit', [StaffController::class, 'actionAdd'])->name('p_edit');
+
+        Route::get('/exportcsv', [StaffController::class, 'exportCsv'])->name('exportcsv');
+        Route::get('/exportpdf', [StaffController::class, 'exportPdf'])->name('exportpdf');
     });
 
-    Route::group(['middleware' => ['adminexistedmiddleware']], function () {
-        Route::get('/login', [AdminLoginController::class, 'index'])->name('loginManagement');
-        Route::post('/login', [AdminLoginController::class, 'actionLogin'])->name('p_loginManagement');
+    Route::group(['prefix' => 'attendance', 'as'=> 'attendance.'], function () {
+        Route::get('/', [AttendanceController::class, 'index'])->name('list');
+
+        Route::get('/exportcsv', [AttendanceController::class, 'exportCsv'])->name('exportcsv');
+        Route::get('/exportpdf', [AttendanceController::class, 'exportPdf'])->name('exportpdf');
     });
 
+    Route::group(['prefix' => 'report', 'as'=> 'report.'], function () {
+        Route::get('/', [ReportController::class, 'index'])->name('list');
+
+        Route::get('/exportcsv', [ReportController::class, 'exportCsv'])->name('exportcsv');
+        Route::get('/exportpdf', [ReportController::class, 'exportPdf'])->name('exportpdf');
+    });
 });
 

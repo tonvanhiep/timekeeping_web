@@ -81,209 +81,29 @@
         <table width="100%">
             <thead>
                 <tr>
+                    <td>ID</td>
                     <td>Name</td>
-                    <td>Email</td>
-                    <td>ID Worker</td>
-                    <td>Department</td>
-                    <td>Position</td>
+                    <td>Reason</td>
                     <td>Date</td>
-                    <td>Day</td>
-                    <td>Clock in</td>
-                    <td>Clock out</td>
-                    <td>Workhour</td>
+                    <td>Status</td>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td class="name">
-                        <h5>Ho Viet Cuong</h5>
-                    </td>
-                    <td class="email">
-                        <p>cuong.ho1912820@hcmut.edu.vn</p>
-                    </td>
                     <td class="id">
                         <p>1912820</p>
                     </td>
-                    <td class="depart">
-                        <p>Software</p>
-                    </td>
-                    <td class="position">
-                        <p>Web developer</p>
-                    </td>
-                    <td class="date">
-                        <p>14-10-2022</p>
-                    </td>
-                    <td class="day">
-                        <p>Fri</p>
-                    </td>
-                    <td class="time-in">
-                        <p>9:00:22</p>
-                    </td>
-                    <td class="time-out">
-                        <p>18:30:33</p>
-                    </td>
-                    <td class="workhour">
-                        <p>9:30:11</p>
-                    </td>
-                </tr>
-                <tr>
                     <td class="name">
-                        <h5>Ton Van Hiep</h5>
-                    </td>
-                    <td class="email">
-                        <p>19521492@gm.uit.edu.vn</p>
-                    </td>
-                    <td class="id">
-                        <p>19521492</p>
-                    </td>
-                    <td class="depart">
-                        <p>Finance</p>
-                    </td>
-                    <td class="position">
-                        <p>Driver</p>
+                        <h5>Ho Viet Cuong</h5>
                     </td>
                     <td class="date">
-                        <p>14-10-2022</p>
-                    </td>
-                    <td class="day">
-                        <p>Fri</p>
-                    </td>
-                    <td class="time-in">
-                        <p>9:50:50</p>
-                    </td>
-                    <td class="time-out">
-                        <p>17:50:51</p>
-                    </td>
-                    <td class="workhour">
-                        <p>8:00:01</p>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="name">
-                        <h5>N.T.Quang Nhat</h5>
-                    </td>
-                    <td class="email">
-                        <p>quangnhat@tdtu.edu.vn</p>
-                    </td>
-                    <td class="id">
-                        <p>19132387</p>
-                    </td>
-                    <td class="depart">
-                        <p>Guard</p>
-                    </td>
-                    <td class="position">
-                        <p>Parking</p>
+                        <p>E, may cham cong tui bi sai kia</p>
                     </td>
                     <td class="date">
-                        <p>14-10-2022</p>
-                    </td>
-                    <td class="day">
-                        <p>Fri</p>
-                    </td>
-                    <td class="time-in">
-                        <p>9:50:50</p>
-                    </td>
-                    <td class="time-out">
-                        <p>17:50:51</p>
+                        <p>Fri 14-10-2022 9:00:22</p>
                     </td>
                     <td class="workhour">
-                        <p>8:00:01</p>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="name">
-                        <h5>Dang Thai Sanh</h5>
-                    </td>
-                    <td class="email">
-                        <p>thaisanh@ueh.edu.vn</p>
-                    </td>
-                    <td class="id">
-                        <p>19130922</p>
-                    </td>
-                    <td class="depart">
-                        <p>Finance</p>
-                    </td>
-                    <td class="position">
-                        <p>Account</p>
-                    </td>
-                    <td class="date">
-                        <p>14-10-2022</p>
-                    </td>
-                    <td class="day">
-                        <p>Fri</p>
-                    </td>
-                    <td class="time-in">
-                        <p>9:50:50</p>
-                    </td>
-                    <td class="time-out">
-                        <p>17:50:51</p>
-                    </td>
-                    <td class="workhour">
-                        <p>8:00:01</p>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="name">
-                        <h5>Le Ba Khiem</h5>
-                    </td>
-                    <td class="email">
-                        <p>khiemle@gm.uit.edu.vn</p>
-                    </td>
-                    <td class="id">
-                        <p>19919034</p>
-                    </td>
-                    <td class="depart">
-                        <p>Guard</p>
-                    </td>
-                    <td class="position">
-                        <p>Parking</p>
-                    </td>
-                    <td class="date">
-                        <p>14-10-2022</p>
-                    </td>
-                    <td class="day">
-                        <p>Fri</p>
-                    </td>
-                    <td class="time-in">
-                        <p>9:50:50</p>
-                    </td>
-                    <td class="time-out">
-                        <p>17:50:51</p>
-                    </td>
-                    <td class="workhour">
-                        <p>8:00:01</p>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="name">
-                        <h5>P.T Cam Tu</h5>
-                    </td>
-                    <td class="email">
-                        <p>camtu@ump.edu.vn</p>
-                    </td>
-                    <td class="id">
-                        <p>1912821</p>
-                    </td>
-                    <td class="depart">
-                        <p>Heath</p>
-                    </td>
-                    <td class="position">
-                        <p>Pharmacist</p>
-                    </td>
-                    <td class="date">
-                        <p>14-10-2022</p>
-                    </td>
-                    <td class="day">
-                        <p>Fri</p>
-                    </td>
-                    <td class="time-in">
-                        <p>9:50:50</p>
-                    </td>
-                    <td class="time-out">
-                        <p>18:50:51</p>
-                    </td>
-                    <td class="workhour">
-                        <p>9:00:01</p>
+                        <p></p>
                     </td>
                 </tr>
             </tbody>

@@ -24,7 +24,7 @@ class DashboardController extends Controller
 
         $info = [
             'employees' => $employees->getCountEmployees([
-                'status' => 2,
+                'status' => 1,
             ]),
             'male' => $employees->getCountEmployees([
                 'gender' => 1,

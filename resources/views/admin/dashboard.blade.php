@@ -60,23 +60,23 @@
                 @foreach ($list as $item)
                     <tr>
                         <td class="person">
-                            <img src="{{asset($item['avatar']);}}" alt="avatar {{ $item['first_name'] }} {{ $item['last_name'] }}">
+                            <img src="{{ $item->avatar }}" alt="avatar {{ $item->first_name }} {{ $item->last_name }}">
                             <div class="person-description">
-                                <h5>{{ $item['first_name'] }} {{ $item['last_name'] }}</h5>
-                                <p>{{ $item['email'] }}</p>
+                                <h5>{{ $item->first_name }} {{ $item->last_name }}</h5>
+                                <p>...</p></p>
                             </div>
                         </td>
                         <td class="position">
-                            <h5>{{ $item['department'] }}</h5>
-                            <p>{{ $item['position'] }}</p>
+                            <h5>{{ $item->department }}</h5>
+                            <p>{{ $item->position }}</p>
                         </td>
                         <td class="status">
-                            <p class="active">{{ $item['status'] }}</p>
+                            <p class="active">{{ statusEmployeeMean($item->status) }}</p>
                         </td>
                         <td class="id">
-                            <p>{{ $item['id'] }}</p>
+                            <p>{{ $item->id }}</p>
                         </td>
-                        <td class="edit"><a href="#">Edit</a></td>
+                        <td class="edit"><a href="{{ route('admin.staff.edit', ['id' => $item->id]) }}">Edit</a></td>
                     </tr>
                 @endforeach
 
@@ -100,27 +100,7 @@
                     </td>
                     <td class="edit"><a href="#">Edit</a></td>
                 </tr>
-
-                <tr>
-                    <td class="person">
-                        <img src="{{asset('assets/img/quangnhat.jpg');}}" alt="">
-                        <div class="person-description">
-                            <h5>Quang Nhat</h5>
-                            <p>quangnhat@tdtu.edu.vn</p>
-                        </div>
-                    </td>
-                    <td class="position">
-                        <h5>Guard</h5>
-                        <p>Parking</p>
-                    </td>
-                    <td class="status">
-                        <p class="active">Active</p>
-                    </td>
-                    <td class="id">
-                        <p>19132387</p>
-                    </td>
-                    <td class="edit"><a href="#">Edit</a></td>
-                </tr> --}}
+                --}}
 
             </tbody>
         </table>
