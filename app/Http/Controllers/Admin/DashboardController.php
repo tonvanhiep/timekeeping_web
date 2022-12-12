@@ -15,28 +15,49 @@ class DashboardController extends Controller
         $employees = new EmployeesModel();
         $notification = new NoticesModel();
 
-        $list = $employees->getEmployees([
-            'status' => 1,
+        $list = $employees->pagination([
+            'status' => [1, 2],
             'sort' => 1,
         ]);
-
+        //dd($list);
+        $pagination = [
+            'lastPage' => $list->lastPage(),
+            'currentPage' => $list->currentPage()
+        ];
         $notification = $notification->getNotifications([]);
 
         $info = [
             'employees' => $employees->getCountEmployees([
-                'status' => 1,
+                'status' => [1, 2],
             ]),
             'male' => $employees->getCountEmployees([
                 'gender' => 1,
-                'status' => 1,
+                'status' => [1, 2],
             ]),
             'female' => $employees->getCountEmployees([
                 'gender' => 0,
-                'status' => 1,
+                'status' => [1, 2],
             ]),
             'active' => $employees->getCountEmployees(['status' => 1]),
         ];
+        $page = 'dashboard';
+        return view('admin.dashboard', compact('list', 'notification', 'info', 'page', 'pagination'));
+    }
 
-        return view('admin.dashboard', compact('list', 'notification', 'info'));
+    public function pagination (Request $request)
+    {
+        $employees = new EmployeesModel();
+
+        $list = $employees->pagination([
+            'status' => [1, 2],
+            'sort' => 1,
+        ], $request->page);
+
+        $pagination = [
+            'lastPage' => $list->lastPage(),
+            'currentPage' => $list->currentPage()
+        ];
+        $returnHTML = view('admin.pagination.dashboard', compact('list', 'pagination'))->render();
+        return response()->json($returnHTML);
     }
 }

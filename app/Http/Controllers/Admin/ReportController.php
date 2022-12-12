@@ -10,7 +10,7 @@ class ReportController extends Controller
     public function index()
     {
         $notification = [];
-
-        return view('admin.report', compact('notification'));
+        $page = 'report';
+        return view('admin.report', compact('notification', 'page'));
     }
 }

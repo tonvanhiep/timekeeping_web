@@ -6,18 +6,85 @@
 @endsection
 
 
-@section('css')
+@push('css')
     <link rel="stylesheet" href="{{asset('assets/css/staff.css');}}">
-@endsection
+    <link rel="stylesheet" href="{{asset('assets/css/report.css');}}">
+@endpush
 
 
 @section('content')
     <h3 class="i-name">Staff List</h3>
 
+    <form class="filter">
+
+        <div class="filter-depart">
+            <label for="office">Office</label>
+            <div class="filter-input">
+                <select name="office" style="font-style: 14px; padding: 5px 10px; border-radius:5px; min-width:150px;">
+                    <option value="">All</option>
+                    @foreach ($office as $item)
+                        <option value="{{ $item->id }}" @if ($condition['office'] == $item->id) selected @endif>{{ $item->office_name }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <label for="depart" style="margin-left: 30px">Department</label>
+            <div class="filter-input">
+                <select name="depart" style="font-style: 14px; padding: 5px 10px; border-radius:5px; min-width:150px;">
+                    <option value="">All</option>
+                    {{-- @foreach ($office as $item)
+                        <option value="{{ $item->office_name }}"></option>
+                    @endforeach --}}
+                </select>
+            </div>
+        </div>
+
+        <div class="filter-date">
+            <label for="status">Status</label>
+            <div class="status">
+                <select name="status" style="font-style: 14px; padding: 5px 10px; border-radius:5px">
+                    <option value="" selected>All</option>
+                    <option value="1" @if ($condition['status'] == 1) selected @endif>Active</option>
+                    <option value="2" @if ($condition['status'] == 2) selected @endif>Maternity Leave</option>
+                    <option value="0" @if ($condition['status'] == 0) selected @endif>Quit job</option>
+                </select>
+            </div>
+
+            <label for="sort" style="margin-left: 50px">Sort By</label>
+            <div class="status">
+                <select name="sort" style="font-style: 14px; padding: 5px 10px; border-radius:5px">
+                    <option value="1" @if ($condition['sort'] == 1) selected @endif>ID Z->A</option>
+                    <option value="2" @if ($condition['sort'] == 2) selected @endif>ID A->Z</option>
+                    <option value="3" @if ($condition['sort'] == 3) selected @endif>Name A->Z</option>
+                    <option value="4" @if ($condition['sort'] == 4) selected @endif>Name Z->A</option>
+                </select>
+            </div>
+
+            <div class="get-btn">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="submit" value="Filter" style="background:none; color:white">
+            </div>
+        </div>
+    </form>
+
     <div class="tool-board">
+        <form id="show-form" class="show" method="POST" action="{{ 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']}}">
+            <label for="show-text">Show</label>
+            <div class="show-input">
+                <input id="input-show" type="text" list="nrows" size="10" formtarget="" name="show" value="{{ $pagination['perPage'] }}">
+                <!-- <i class="fa-solid fa-chevron-down"></i> -->
+                <datalist id="nrows">
+                    <option value="25"></option>
+                    <option value="50" selected></option>
+                    <option value="100"></option>
+                    <option value="200"></option>
+                </datalist>
+            </div>
+        </form>
+
         <ul class="print">
-            <li><a href="{{ route('admin.staff.exportcsv') }}">CSV</a></li>
-            <li><a href="{{ route('admin.staff.exportpdf') }}">PDF</a></li>
+            <li><a href="{{ route('admin.staff.exportcsv') . (isset($_SERVER['QUERY_STRING']) == true ? ('?' . $_SERVER['QUERY_STRING']) : '') }}">CSV</a></li>
+            <li><a href="{{ route('admin.staff.exportpdf') . (isset($_SERVER['QUERY_STRING']) == true ? ('?' . $_SERVER['QUERY_STRING']) : '') }}">PDF</a></li>
             <li><a href="#">PRINT</a></li>
         </ul>
         <div class="btn-add">
@@ -28,82 +95,16 @@
 
     <div class="search-table">
         <div>
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" placeholder="Search" size="10">
+            <form>
+                <button type="submit" style="background: none"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <input type="text" placeholder="Search" name="search" size="10">
+            </form>
+
         </div>
     </div>
 
-    <div class="board">
-        <table width="100%">
-            <thead>
-                <tr>
-                    <td>Name</td>
-                    <td>Date of birth</td>
-                    <td>Email</td>
-                    <td>ID</td>
-                    <td>Department</td>
-                    <td>Position</td>
-                    <td>Join date</td>
-                    <td>Address</td>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($list as $item)
-                    <tr>
-                        <td class="name">
-                            <h5>{{ $item->last_name }} {{ $item->first_name }}</h5>
-                        </td>
-                        <td class="birth">
-                            <p>{{ $item->birth_day }}</p>
-                        </td>
-                        <td class="email">
-                            <p>cuong.ho1912820@hcmut.edu.vn</p>
-                        </td>
-                        <td class="id">
-                            <p>{{ $item->id }}</p>
-                        </td>
-                        <td class="depart">
-                            <p>{{ $item->department }}</p>
-                        </td>
-                        <td class="position">
-                            <p>{{ $item->position }}</p>
-                        </td>
-                        <td class="date">
-                            <p>{{ $item->join_day }}</p>
-                        </td>
-                        <td class="address">
-                            <p>{{ $item->address }}</p>
-                        </td>
-                    </tr>
-                @endforeach
-                {{-- <tr>
-                    <td class="name">
-                        <h5>Ho Viet Cuong</h5>
-                    </td>
-                    <td class="birth">
-                        <p>18/03/2001</p>
-                    </td>
-                    <td class="email">
-                        <p>cuong.ho1912820@hcmut.edu.vn</p>
-                    </td>
-                    <td class="id">
-                        <p>1912820</p>
-                    </td>
-                    <td class="depart">
-                        <p>Software</p>
-                    </td>
-                    <td class="position">
-                        <p>Web developer</p>
-                    </td>
-                    <td class="date">
-                        <p>14-10-2022</p>
-                    </td>
-                    <td class="address">
-                        <p>Viet Nam</p>
-                    </td>
-                </tr> --}}
-
-            </tbody>
-        </table>
+    <p id="url-pagination" hidden>{{ 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']}}</p>
+    <div id="content">
+        @include('admin.pagination.staff')
     </div>
 @endsection

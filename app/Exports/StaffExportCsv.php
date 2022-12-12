@@ -3,6 +3,7 @@
 namespace App\Exports;
 
 use App\Models\EmployeesModel;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
@@ -16,31 +17,42 @@ class StaffExportCsv implements FromCollection, WithHeadings
     */
     protected $table = 'employees';
 
+    public $condition = [];
+    public function __construct(Request $request)
+    {
+        $this->condition = [
+            'status' => $request->input('status') == null ? [0, 1, 2] : $request->input('status'),
+            'sort' => $request->input('sort') == null ? 1 : $request->input('sort'),
+            'search' => $request->input('search'),
+            'office' => $request->input('office'),
+            'depart' => $request->input('depart')
+        ];
+    }
+
     public function collection()
     {
-        $result = DB::table($this->table)
-        ->leftJoin('accounts', 'accounts.employee_id', '=', $this->table.'.id')
-        ->leftJoin('offices', 'offices.id', '=', $this->table.'.office_id')
-        ->select(
-            'last_name',
-            'first_name',
-            'email',
-            'birth_day',
-            DB::raw('CASE gender WHEN 0 THEN "Female" WHEN 1 THEN "Male" ELSE "Error" END AS gender'),
-            $this->table.'.address',
-            $this->table.'.numerphone',
-            'department',
-            'position',
-            'start_time',
-            'end_time',
-            'working_day',
-            'salary',
-            'office_name',
-            'join_day',
-            'left_day',
-            DB::raw('CASE status WHEN 0 THEN "Quit" WHEN 1 THEN "Active" ELSE "Pause" END AS status')
-        );
+        $employees = new EmployeesModel();
 
+        $result = $employees->selectEmployees($this->condition)
+            ->select(
+                'last_name',
+                'first_name',
+                'email',
+                'birth_day',
+                DB::raw('CASE gender WHEN 0 THEN "Female" WHEN 1 THEN "Male" ELSE "Error" END AS gender'),
+                $this->table.'.address',
+                $this->table.'.numerphone',
+                'department',
+                'position',
+                'start_time',
+                'end_time',
+                'working_day',
+                'salary',
+                'office_name',
+                'join_day',
+                'left_day',
+                DB::raw('CASE status WHEN 0 THEN "Quit Job" WHEN 1 THEN "Active" ELSE "Maternity Leave" END AS status')
+            );
         return $result->get();
     }
 

@@ -2,7 +2,7 @@
 
 
 @section('title')
-    Report
+    Timesheet
 @endsection
 
 
@@ -12,7 +12,7 @@
 
 
 @section('content')
-    <h3 class="i-name">Attendance Report</h3>
+    <h3 class="i-name">Timesheet</h3>
 
     <form class="filter">
 
@@ -23,9 +23,9 @@
                 <!-- <i class="fa-solid fa-chevron-down"></i> -->
             </div>
             <datalist id="office">
-                {{-- @foreach ($office as $item)
+                @foreach ($office as $item)
                     <option value="{{ $item->office_name }}"></option>
-                @endforeach --}}
+                @endforeach
             </datalist>
 
             <label for="depart" style="margin-left: 30px">Department</label>
@@ -34,16 +34,22 @@
                 <!-- <i class="fa-solid fa-chevron-down"></i> -->
             </div>
             <datalist id="departs"></datalist>
-
-            <div class="filter-date">
-                <div class="get-btn">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                    <input type="submit" value="Filter" style="background:none; color:white">
-                </div>
-            </div>
         </div>
 
-
+        <div class="filter-date">
+            <label for="start-date">From date</label>
+            <div class="filter-input">
+                <input type="date" name="from" value="2022-12-01" style="font-style: 14px; padding: 5px 10px; border-radius:5px">
+            </div>
+            <label for="end-date" style="margin-left: 50px">To date</label>
+            <div class="filter-input">
+                <input type="date" name="to" value="2022-12-08" style="font-style: 14px; padding: 5px 10px; border-radius:5px">
+            </div>
+            <div class="get-btn">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="submit" value="Filter" style="background:none; color:white">
+            </div>
+        </div>
     </form>
 
     <div class="tool-board">
@@ -54,10 +60,10 @@
                 <!-- <i class="fa-solid fa-chevron-down"></i> -->
             </div>
             <datalist id="nrows">
-                <option value="10"></option>
-                <option value="15"></option>
-                <option value="20"></option>
                 <option value="25"></option>
+                <option value="50"></option>
+                <option value="75"></option>
+                <option value="100"></option>
             </datalist>
         </form>
         <ul class="print">
@@ -73,27 +79,43 @@
                 <tr>
                     <td>Name</td>
                     <td>ID</td>
-                    <td>Content</td>
-                    <td>Date</td>
-                    <td>Status</td>
+                    <td>Office</td>
+                    <td>Department</td>
+                    <td>Late</td>
+                    <td>Early</td>
+                    <td>Off</td>
+                    <td>Full</td>
+                    <td>Total</td>
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                <tr onclick="window.location='http://127.0.0.1:9000/admin/timesheet/detail/2'">
                     <td class="name">
                         <h5>Ho Viet Cuong</h5>
                     </td>
                     <td class="id">
                         <p>1912820</p>
                     </td>
-                    <td class="date">
-                        <p>E, may cham cong tui bi sai kia</p>
+                    <td class="office">
+                        <p>SSC VietNam</p>
                     </td>
-                    <td class="date">
-                        <p>9:00:22 14-10-2022</p>
+                    <td class="department">
+                        <p>Marketing</p>
                     </td>
-                    <td class="workhour">
-                        <p></p>
+                    <td class="late">
+                        <p>5</p>
+                    </td>
+                    <td class="early">
+                        <p>0</p>
+                    </td>
+                    <td class="off">
+                        <p>2/2</p>
+                    </td>
+                    <td class="full">
+                        <p>24</p>
+                    </td>
+                    <td class="total">
+                        <p>26</p>
                     </td>
                 </tr>
             </tbody>

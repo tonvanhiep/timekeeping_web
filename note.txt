@@ -1,0 +1,27 @@
+Dashboard:
+  -  //đổi màu sắc các trạng thái
+  -  //phân trang
+
+Staff List:
+  -  //xuất file theo điều kiện
+  -  //lọc theo điều kiện
+  -  //phân trang
+
+Attendance:
+  -  //xuất file / xuất theo điều kiện
+  -  //phân trang
+  -  //hiện thị + lọc
+
+Timesheet / Timesheet Detail / Timesheet Detail Attendance:
+  -  xuất file / xuất theo điều kiện
+  -  phân trang
+  -  hiện thị + lọc
+  -  hiện thị thông tin
+  -  ...
+
+Report:
+  -  xuất file / xuất theo điều kiện
+  -  phân trang
+  -  hiện thị + lọc
+  -  hiện thị thông tin
+  -  ...

@@ -6,9 +6,9 @@
 @endsection
 
 
-@section('css')
+@push('css')
     <link rel="stylesheet" href="{{asset('assets/css/dashboard.css');}}">
-@endsection
+@endpush
 
 
 @section('content')
@@ -44,65 +44,8 @@
             </div>
         </div>
     </div>
-
-    <div class="board">
-        <table width="100%">
-            <thead>
-                <tr>
-                    <td>Name</td>
-                    <td>Position</td>
-                    <td>Status</td>
-                    <td>ID</td>
-                    <td></td>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($list as $item)
-                    <tr>
-                        <td class="person">
-                            <img src="{{ $item->avatar }}" alt="avatar {{ $item->first_name }} {{ $item->last_name }}">
-                            <div class="person-description">
-                                <h5>{{ $item->first_name }} {{ $item->last_name }}</h5>
-                                <p>...</p></p>
-                            </div>
-                        </td>
-                        <td class="position">
-                            <h5>{{ $item->department }}</h5>
-                            <p>{{ $item->position }}</p>
-                        </td>
-                        <td class="status">
-                            <p class="active">{{ statusEmployeeMean($item->status) }}</p>
-                        </td>
-                        <td class="id">
-                            <p>{{ $item->id }}</p>
-                        </td>
-                        <td class="edit"><a href="{{ route('admin.staff.edit', ['id' => $item->id]) }}">Edit</a></td>
-                    </tr>
-                @endforeach
-
-                {{-- <tr>
-                    <td class="person">
-                        <img src="{{asset('assets/img/hiep.png');}}" alt="">
-                        <div class="person-description">
-                            <h5>Van Hiep</h5>
-                            <p>19521492@gm.uit.edu.vn</p>
-                        </div>
-                    </td>
-                    <td class="position">
-                        <h5>Guard</h5>
-                        <p>Parking</p>
-                    </td>
-                    <td class="status">
-                        <p class="active">Active</p>
-                    </td>
-                    <td class="id">
-                        <p>19521492</p>
-                    </td>
-                    <td class="edit"><a href="#">Edit</a></td>
-                </tr>
-                --}}
-
-            </tbody>
-        </table>
+    <p id="url-pagination" hidden>{{ route('admin.dashboard.pagination') }}</p>
+    <div id="content">
+        @include('admin.pagination.dashboard')
     </div>
 @endsection

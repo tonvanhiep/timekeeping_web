@@ -39,12 +39,12 @@
                         <p>@webdev</p>
                     </div>
                 </div>
-                <a href="#" class="btn">
+                {{-- <a href="#" class="btn">
                     <i class="fa-solid fa-plus"></i>
                     Add profile
-                </a>
+                </a> --}}
                 <ul class="function">
-                    <li>
+                    {{-- <li>
                         <i class="fa-solid fa-pen-to-square"></i>
                         <a href="#">Edit profile</a>
                     </li>
@@ -59,7 +59,7 @@
                     <li>
                         <i class="fa-solid fa-circle-question"></i>
                         <a href="#">Help</a>
-                    </li>
+                    </li> --}}
                     <li>
                         <i class="fa-solid fa-right-from-bracket"></i>
                         <a href="#">Log out</a>

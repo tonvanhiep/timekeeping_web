@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Database\Factories\OfficesFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -19,11 +20,10 @@ class OfficesModel extends Model
         'address',
         'numerphone',
         'note',
-        'create_at',
-        'create_user',
-        'update_at',
-        'update_user',
-        'avatar'
+        'created_at',
+        'updated_at',
+        'created_user',
+        'updated_user'
     ];
 
     public function selectOffices($condition = null)
@@ -43,5 +43,10 @@ class OfficesModel extends Model
     {
         $result = $this->selectOffices($condition);
         return $result == null ? 0 : $result->count();
+    }
+
+    protected static function newFactory()
+    {
+        return OfficesFactory::new();
     }
 }
