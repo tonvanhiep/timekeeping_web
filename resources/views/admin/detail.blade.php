@@ -6,9 +6,9 @@
 @endsection
 
 
-@section('css')
+@push('css')
     <link rel="stylesheet" href="{{asset('assets/css/report.css');}}">
-@endsection
+@endpush
 
 
 @section('content')
@@ -64,7 +64,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr onclick="window.location='http://127.0.0.1:9000/admin/timesheet/detail/2/attendane'">
+                <tr onclick="window.location='127.0.0.1:9000/admin/timesheet/detail/2/attendance'">
                     <td class="weekday">
                         <p>Friday</p>
                     </td>

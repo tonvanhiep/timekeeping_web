@@ -89,7 +89,7 @@
         </ul>
         <div class="btn-add">
             <i class="fa-solid fa-plus"></i>
-            <a href="{{route('admin.staff.add')}}">New Employee</a>
+            <a href="{{route('admin.staff.create')}}">New Employee</a>
         </div>
     </div>
 

@@ -6,9 +6,9 @@
 @endsection
 
 
-@section('css')
+@push('css')
     <link rel="stylesheet" href="{{asset('assets/css/report.css');}}">
-@endsection
+@endpush
 
 
 @section('content')

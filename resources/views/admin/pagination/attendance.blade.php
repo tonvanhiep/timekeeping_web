@@ -16,7 +16,7 @@
                 @php $dt = new DateTime($item->timekeeping_at); @endphp
                 <tr>
                     <td class="name">
-                        <h5>{{ $item->first_name }} {{ $item->last_name }}</h5>
+                        <h5>{{ $item->last_name }} {{ $item->first_name }}</h5>
                     </td>
                     <td class="id">
                         <p>{{ $item->id }}</p>

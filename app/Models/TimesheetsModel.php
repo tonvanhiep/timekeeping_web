@@ -6,6 +6,7 @@ use Database\Factories\TimesheetsFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class TimesheetsModel extends Model
 {
@@ -41,7 +42,7 @@ class TimesheetsModel extends Model
         ->join('employees', 'employees.id', '=', $this->table.'.employee_id')
         ->select('employees.id', 'employees.first_name', 'employees.last_name', 'office_name',
             $this->table.'.timekeeper_id', 'timekeeping_at')
-        ->latest('timekeeping_at');
+        ->orderByDesc($this->table.'.id');
 
         if (isset($condition['office'])) {
             $result = $result->where('offices.id', $condition['office']);
@@ -51,6 +52,9 @@ class TimesheetsModel extends Model
         }
         if (isset($condition['to'])) {
             $result = $result->where('timekeeping_at', '<=', $condition['to'].' 23:59:59');
+        }
+        if (isset($condition['status'])) {
+            $result = $result->where($this->table.'.status', $condition['status']);
         }
 
         return $result;
@@ -65,5 +69,21 @@ class TimesheetsModel extends Model
     public function pagination($condition = [], $page = 1, $perPage = 50)
     {
         return $this->selectAttendances($condition)->paginate($perPage, '*', 'page', $page);
+    }
+
+    public function saveAttendance($data = null)
+    {
+        if ($data == null) return;
+        DB::table($this->table)->insert([
+            'employee_id' => $data['employee_id'],
+            'timekeeper_id' => $data['timekeeper_id'],
+            'timekeeping_at' => Carbon::now(),
+            'face_image' => $data['face_image'],
+            'status' => $data['status'],
+            'created_user' => $data['employee_id'],
+            'updated_user' => $data['employee_id'],
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
+        ]);
     }
 }

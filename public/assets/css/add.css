@@ -62,9 +62,9 @@ body {
 #menu .items li:hover i, #menu .items li:hover a {
   color: #f3f4f6;
 }
-/* #menu .items li:nth-child(1) {
+#menu .items li:nth-child(1) {
   border-left: 4px solid #fff;
-} */
+}
 
 #interface {
   width: calc(100% - 300px);
@@ -331,10 +331,13 @@ body {
   display: flex;
   justify-content: space-between;
 }
-#interface .board .input-container form {
+#interface .board .input-container .form {
   display: flex;
   align-items: center;
   margin-bottom: 23px;
+}
+#interface .board .input-container .short input {
+  flex: 0.8;
 }
 #interface .board .input-container .long input {
   flex: 1;
@@ -349,12 +352,12 @@ body {
   border-radius: 5px;
   border: 1px solid #6F6F6F;
 }
-#interface .board .btn {
+#interface .board .btn-save {
   display: flex;
   justify-content: flex-end;
   margin-right: 20px;
 }
-#interface .board .btn .btn-save {
+#interface .board .btn-save button {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -365,13 +368,13 @@ body {
   font-size: 14px;
   transition: all 0.3s;
 }
-#interface .board .btn .btn-save:hover a {
-  color: #f00;
+#interface .board .btn-save button:hover span {
+  color: #7d8193;
 }
-#interface .board .btn .btn-save i {
+#interface .board .btn-save button i {
   margin-right: 10px;
 }
-#interface .board .btn .btn-save a {
+#interface .board .btn-save button span {
   color: #fff;
   transition: all 0.3s;
 }

@@ -22,7 +22,7 @@ class EmployeesModel extends Model
         'birth_day',
         'gender',
         'address',
-        'numerphone',
+        'numberphone',
         'department',
         'position',
         'start_time',
@@ -54,7 +54,7 @@ class EmployeesModel extends Model
             'birth_day',
             'gender',
             $this->table.'.address',
-            $this->table.'.numerphone',
+            $this->table.'.numberphone',
             'department',
             'position',
             'start_time',
@@ -72,6 +72,17 @@ class EmployeesModel extends Model
 
         if (isset($condition['gender'])) {
             $employees = $employees->where('gender', $condition['gender']);
+        }
+
+        if (isset($condition['id'])) {
+            if (is_array($condition['id'])) {
+                $employees = $employees->where(function($query) use ($condition){
+                    foreach ($condition['id'] as $value) {
+                        $query->orWhere($this->table.'.id', $value);
+                    }
+                });
+            }
+            else $employees = $employees->where($this->table.'.id', $condition['id']);
         }
 
         if (isset($condition['status'])) {

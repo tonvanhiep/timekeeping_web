@@ -62,7 +62,7 @@
                     </li> --}}
                     <li>
                         <i class="fa-solid fa-right-from-bracket"></i>
-                        <a href="#">Log out</a>
+                        <a href="{{ route('admin.logout') }}">Log out</a>
                     </li>
                 </ul>
             </div>

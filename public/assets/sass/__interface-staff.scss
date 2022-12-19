@@ -87,7 +87,7 @@
                         border-bottom: 1px solid #eee;
                         color: #828987;
                         span {
-                            color: #f00;                           
+                            color: #f00;
                         }
                     }
                     .noti-item {
@@ -119,8 +119,8 @@
 
                 }
             }
-            .account {  
-                position: relative;          
+            .account {
+                position: relative;
                 &-avatar {
                     img {
                         display: block;
@@ -220,7 +220,7 @@
                                 margin-right: 10px;
                             }
                         }
-                        
+
                     }
                 }
             }
@@ -298,7 +298,7 @@
 
     .board {
         margin: 30px;
-        overflow: auto;
+        overflow: hidden;
         background-color: #fff;
         border-radius: 8px;
         img {
@@ -340,7 +340,7 @@
             }
             tbody {
                 td {
-                   padding: 10px 15px; 
+                   padding: 10px 15px;
                 }
                 .status {
                     .active {
@@ -356,6 +356,13 @@
                         font-size: 14px;
                         font-weight: 600;
                         color: #554cd1;
+                    }
+                }
+                .delete {
+                    a {
+                        font-size: 14px;
+                        font-weight: 600;
+                        color: #f00;
                     }
                 }
             }

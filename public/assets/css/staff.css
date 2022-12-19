@@ -352,7 +352,7 @@ body {
 }
 #interface .board {
   margin: 30px;
-  overflow: auto;
+  overflow: hidden;
   background-color: #fff;
   border-radius: 8px;
 }
@@ -406,6 +406,11 @@ body {
   font-size: 14px;
   font-weight: 600;
   color: #554cd1;
+}
+#interface .board table tbody .delete a {
+  font-size: 14px;
+  font-weight: 600;
+  color: #f00;
 }
 
 /*# sourceMappingURL=staff.css.map */

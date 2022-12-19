@@ -62,9 +62,9 @@ body {
 #menu .items li:hover i, #menu .items li:hover a {
   color: #f3f4f6;
 }
-/* #menu .items li:nth-child(1) {
+#menu .items li:nth-child(1) {
   border-left: 4px solid #fff;
-} */
+}
 
 #interface {
   width: calc(100% - 300px);
@@ -421,7 +421,7 @@ body {
 }
 #interface .board {
   margin: 30px;
-  overflow: auto;
+  overflow: hidden;
   background-color: #fff;
   border-radius: 8px;
 }

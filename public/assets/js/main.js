@@ -57,21 +57,25 @@ function pagination(page = 1)
 
 
 
-document.getElementById('input-show').onchange = function(){
-    $('#show-form').submit(function(e) {
-        e.preventDefault();
-        var formData = new FormData(this);
-        $.ajax({
-            type:'POST',
-            url: document.getElementById('show-form').action,
-            data: formData,
-            cache:false,
-            contentType: false,
-            processData: false,
-            success: (data) => {
-                document.getElementById('content').innerHTML = data;
-            },
-            error: function(data){}
+var inputShow = document.getElementById('input-show')
+if (inputShow != null) {
+    inputShow.onchange = function(){
+        $('#show-form').submit(function(e) {
+            e.preventDefault();
+            var formData = new FormData(this);
+            $.ajax({
+                type:'POST',
+                url: document.getElementById('show-form').action,
+                data: formData,
+                cache:false,
+                contentType: false,
+                processData: false,
+                success: (data) => {
+                    document.getElementById('content').innerHTML = data;
+                },
+                error: function(data){}
+            });
         });
-    });
-};
+    };
+}
+

@@ -13,9 +13,9 @@
             @foreach ($list as $item)
                 <tr>
                     <td class="person">
-                        <img src="{{ $item->avatar }}" alt="avatar {{ $item->first_name }} {{ $item->last_name }}">
+                        <img src="{{ asset("$item->avatar") }}" alt="avatar {{ $item->first_name }} {{ $item->last_name }}">
                         <div class="person-description">
-                            <h5>{{ $item->first_name }} {{ $item->last_name }}</h5>
+                            <h5>{{ $item->last_name }} {{ $item->first_name }}</h5>
                             <p>...</p></p>
                         </div>
                     </td>

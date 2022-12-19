@@ -1,4 +1,7 @@
 <div class="board">
+    @if (session('success'))
+        {{ session('success') }}
+    @endif
     <table width="100%">
         <thead>
             <tr>
