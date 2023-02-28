@@ -13,14 +13,15 @@ class FaceEmployeeImagesModel extends Model
     protected $table = 'face_employee_images';
 
     protected $fillable = [
+        'id',
         'employee_id',
         'image_url',
-        'image_index',
         'status',
+        'note',
         'created_at',
         'created_user',
         'updated_at',
-        'updated_user',
+        'updated_user'
     ];
 
     public function selectImages($condition = null)

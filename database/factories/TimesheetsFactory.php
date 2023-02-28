@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\EmployeesModel;
+use App\Models\TimekeepersModel;
 use App\Models\TimesheetsModel;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -25,11 +26,11 @@ class TimesheetsFactory extends Factory
         $listId = $employee->getEmployeesId(['status' => 1]);
         $employeeid = $listId[rand(0, count($listId) - 1)]->id;
 
-        $tkerid = rand(1, 12);
-
+        $tkerid = new TimekeepersModel();
+        $tkerid = $tkerid->getTimekeepers();
         return [
+            'timekeeper_id' => ($tkerid == null) ? null : $tkerid[rand(0, count($tkerid) - 1)]->id,
             'employee_id' => $employeeid,
-            'timekeeper_id' => $tkerid == 2 ? 1 : $tkerid,
             'timekeeping_at' => $this->faker->dateTimeBetween($startDate = '-3 months', $endDate = 'now', $timezone = 'asia/ho_chi_minh'),
             'face_image' => $this->faker->imageUrl,
             'status' => 1,

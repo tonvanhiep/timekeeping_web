@@ -25,9 +25,9 @@ class OfficesFactory extends Factory
             'office_name' => $this->faker->city,
             'city' => $this->faker->city,
             'address' => $this->faker->address,
-            'numerphone' => $this->faker->phoneNumber,
-            'created_user' => 1,
-            'updated_user' => 1
+            'phone_number' => $this->faker->phoneNumber
+            // 'created_user' => 1,
+            // 'updated_user' => 1
         ];
     }
 }

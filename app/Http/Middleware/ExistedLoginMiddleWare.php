@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class LoginMiddleware
+class ExistedLoginMiddleWare
 {
     /**
      * Handle an incoming request.
@@ -19,10 +19,9 @@ class LoginMiddleware
     {
         if (Auth::check()) {
             if (Auth::user()->fl_admin == 1) {
-                return $next($request);
+                return redirect()->route('admin.auth.login');
             }
-            return redirect()->route('admin.auth.login')->with('error', 'Check your Role!');
         }
-        return redirect()->route('admin.auth.login')->with('error', 'Check your pass');
+        return $next($request);
     }
 }

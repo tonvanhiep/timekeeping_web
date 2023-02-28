@@ -13,21 +13,24 @@ return new class extends Migration
      */
     public function up()
     {
+        if (Schema::hasTable('offices')) {
+            $this->down();
+        }
+
         Schema::create('offices', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->string('office_name', 100);
             $table->string('city', 50);
             $table->string('address', 200);
-            $table->string('numerphone', 15);
-            $table->string('note', 100);
+            $table->string('phone_number', 30);
+            $table->text('note')->nullable();
 
-            $table->timestamp('create_at')->nullable();
-            $table->unsignedBigInteger('create_user');
-            $table->timestamp('update_at')->nullable();
-            $table->unsignedBigInteger('update_user');
+            $table->timestamps();
+            $table->unsignedInteger('created_user')->nullable();
+            $table->unsignedInteger('updated_user')->nullable();
 
-            $table->foreign('create_user')->references('id')->on('employees');
-            $table->foreign('update_user')->references('id')->on('employees');
+            $table->foreign('created_user')->references('id')->on('employees')->cascadeOnUpdate()->nullOnDelete();
+            $table->foreign('updated_user')->references('id')->on('employees')->cascadeOnUpdate()->nullOnDelete();
         });
     }
 

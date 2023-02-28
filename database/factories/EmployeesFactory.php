@@ -35,7 +35,6 @@ class EmployeesFactory extends Factory
         //     $office = new OfficesModel;
         //     $office = $office->getOffices();
         // }
-        if ($office == null) $office[0]['id'] = -1;
 
         return [
             'last_name' => $this->faker->lastName,
@@ -43,16 +42,16 @@ class EmployeesFactory extends Factory
             'birth_day' => $this->faker->date,
             'gender' => $gender,
             'address' => $this->faker->address,
-            'numerphone' => $this->faker->phoneNumber,
+            'phone_number' => $this->faker->phoneNumber,
             'department' => $department,
             'position' => $this->randomPosition($department),
             'start_time' => "$startTime:$halfHour:00",
             'end_time' => "$endTime:$halfHour:00",
             'working_day' => '2|3|4|5|6|7',
             'salary' => rand(5, 50) * 1000000,
-            'office_id' => 0,
-            'create_at' => now(7),
-            'update_at' => now(7),
+            'office_id' => ($office == null) ? null : $office[rand(0, count($office) - 1)]->id,
+            'created_at' => now(7),
+            'updated_at' => now(7),
             'avatar' => randomAvatarUrl(rand(0, 33)),
             'join_day' => $this->faker->date,
             'status' => rand(0, $gender == 1 ? 1 : 2)
@@ -63,13 +62,13 @@ class EmployeesFactory extends Factory
     {
         $arr = [
             'Research & Development',
-            'Marketing',
+            'KH-KTTT',
             'Human Resources',
             'Financial',
-            'Customer Service',
+            'CTSV',
             'Administration',
-            'Accounting',
-            'Sales'
+            'OEP',
+            'TT-KTMT'
         ];
         $i = rand(0, count($arr) - 1);
         return $arr[$i];
@@ -115,6 +114,7 @@ class EmployeesFactory extends Factory
                 'Staff'
             ]
         ];
-        return $department != null ? $arr[$department][rand(0, count($arr[$department]) - 1)] : '';
+        // return $department != null ? $arr[$department][rand(0, count($arr[$department]) - 1)] : '';
+        return '...';
     }
 }

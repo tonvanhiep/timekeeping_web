@@ -18,7 +18,7 @@ class OfficesModel extends Model
         'office_name',
         'city',
         'address',
-        'numerphone',
+        'phone_number',
         'note',
         'created_at',
         'updated_at',

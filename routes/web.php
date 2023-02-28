@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\StaffController;
 use App\Http\Controllers\Admin\TimesheetController;
 use App\Http\Controllers\AttendanceController as ControllersAttendanceController;
 use App\Http\Controllers\LoginController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,6 +21,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/test', function() {
+    dd(Auth::check());
+});
 Route::get('/', function() {
     return view('admin.login.home-login');
 });
@@ -37,14 +41,17 @@ Route::get('/', function() {
 //     Route::get('/attendance', [LoginController::class, 'attendance'])->name('attendance');
 //     Route::post('/attendance', [LoginController::class, 'attendanceLogin'])->name('p_attendance');
 // });
-
-Route::prefix('admin')->name('admin.')->group(function ()
+Route::group(['prefix' => 'admin', 'middleware' => 'existedloginmiddleware', 'as'=> 'admin.'], function ()
 {
     Route::group(['as' => 'auth.'], function()
     {
         Route::get('login', [AuthController::class, 'login'])->name('login');
         Route::post('login', [AuthController::class, 'checkLogin'])->name('check-login');
     });
+});
+
+Route::group(['prefix' => 'admin', 'middleware' => 'loginmiddleware', 'as'=> 'admin.'], function ()
+{
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
@@ -54,7 +61,6 @@ Route::prefix('admin')->name('admin.')->group(function ()
     Route::group(['prefix' => 'staff', 'as'=> 'staff.'], function () {
         Route::get('/', [StaffController::class, 'index'])->name('list');
         Route::post('/', [StaffController::class, 'pagination'])->name('pagination');
-        // Route::post('/pagination', [StaffController::class, 'pagination'])->name('pagination');
         Route::get('create', [StaffController::class, 'create'])->name('create');
         Route::post('store', [StaffController::class, 'store'])->name('store');
 

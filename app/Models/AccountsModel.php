@@ -12,9 +12,11 @@ class AccountsModel extends Authenticatable
 
     protected $table = 'accounts';
 
+    protected $primaryKey = 'employee_id';
+
     protected $fillable = [
         'employee_id',
-        'name',
+        'user_name',
         'email',
         'password',
         'created_at',
@@ -22,5 +24,7 @@ class AccountsModel extends Authenticatable
         'updated_at',
         'updated_user',
         'fl_admin',
+		'email_verified_at',
+		'remember_token'
     ];
 }

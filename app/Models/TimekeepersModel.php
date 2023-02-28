@@ -16,9 +16,9 @@ class TimekeepersModel extends Model
     protected $fillable = [
         'id',
         'office_id',
+        'timekeeper_name',
         'account',
         'password',
-        'device_index',
         'status',
         'created_at',
         'created_user',
@@ -26,7 +26,18 @@ class TimekeepersModel extends Model
         'updated_user'
     ];
 
+    public function selectTimekeepers($condition = null)
+    {
+        $timekeepers = DB::table($this->table)->select('*');
 
+        return $timekeepers;
+    }
+
+    public function getTimekeepers($condition = null)
+    {
+        $result = $this->selectTimekeepers($condition);
+        return $result == null ? [] : $result->get();
+    }
 
     protected static function newFactory()
     {

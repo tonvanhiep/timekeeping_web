@@ -15,7 +15,7 @@ class AuthController extends Controller
 
     public function checkLogin(Request $request) {
         // dd($request->name);
-        if (Auth::attempt(['name' => $request->name, 'password' => $request->password])) {
+        if (Auth::attempt(['email' => $request->name, 'password' => $request->password])) {
             return redirect()->route('admin.dashboard')->with('success', 'Login successfully');
         }
         return redirect()->route('admin.auth.login')->with('error','Login failed');

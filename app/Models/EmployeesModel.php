@@ -22,7 +22,7 @@ class EmployeesModel extends Model
         'birth_day',
         'gender',
         'address',
-        'numberphone',
+        'phone_number',
         'department',
         'position',
         'start_time',
@@ -31,10 +31,10 @@ class EmployeesModel extends Model
         'salary',
         'office_id',
         'note',
-        'create_at',
-        'create_user',
-        'update_at',
-        'update_user',
+        'created_at',
+        'created_user',
+        'updated_at',
+        'updated_user',
         'avatar',
         'join_day',
         'left_day',
@@ -54,7 +54,7 @@ class EmployeesModel extends Model
             'birth_day',
             'gender',
             $this->table.'.address',
-            $this->table.'.numberphone',
+            $this->table.'.phone_number',
             'department',
             'position',
             'start_time',
@@ -142,7 +142,7 @@ class EmployeesModel extends Model
 
     public function getEmployeesId($condition = null)
     {
-        $result = $this->selectEmployees($condition)->select('id');
+        $result = $this->selectEmployees($condition)->select($this->table.'.id');
         return $result == null ? [] : $result->get();
     }
 
