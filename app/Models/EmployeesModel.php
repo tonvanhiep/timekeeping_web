@@ -140,7 +140,7 @@ class EmployeesModel extends Model
         return $result == null ? [] : $result->get();
     }
 
-    public function getEmployeesId($condition = null)
+    public function getIdEmployees($condition = null)
     {
         $result = $this->selectEmployees($condition)->select($this->table.'.id');
         return $result == null ? [] : $result->get();

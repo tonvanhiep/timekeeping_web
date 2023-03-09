@@ -6,6 +6,7 @@ use App\Models\EmployeesModel;
 use App\Models\FaceEmployeeImagesModel;
 use App\Models\TimesheetsModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 
 class AttendanceController extends Controller
@@ -86,5 +87,40 @@ class AttendanceController extends Controller
         ];
 
         return response()->json($data);
+    }
+
+    //API
+    public function ApiGetAttendance(Request $request)
+    {
+        // SELECT ts.timekeeper_id, ts.timekeeping_at, ts.face_image, ts.status, date(ts.timekeeping_at) AS 'date', MIN(time(ts.timekeeping_at)) AS 'check-in', MAX(time(ts.timekeeping_at)) AS 'check-out'
+        // FROM `timesheets` as ts
+        // WHERE ts.employee_id = 1 and ts.status = 1
+        // GROUP BY date(ts.timekeeping_at);
+
+        // SELECT epl.start_time, epl.end_time, epl.working_day, epl.join_day, epl.left_day
+        // FROM `employees` as epl
+        // WHERE epl.id = 1
+        $employee = new EmployeesModel();
+        $timesheets = new TimesheetsModel();
+
+        $employee = $employee->getEmployees([
+            'id' => Auth::user()->employee_id
+        ]);
+        $timesheets = $timesheets->getTimesheetsByEmployeeId([
+            'id' => Auth::user()->employee_id,
+            'status' => 1
+        ]);
+        return response()->json([
+            'message' => 'success',
+            'data' => [
+                'list' => $timesheets,
+                'start_time' => $employee[0]->start_time,
+                'end_time' => $employee[0]->end_time,
+                'working_day' => $employee[0]->working_day,
+                'join_day' => $employee[0]->join_day,
+                'left_day' => $employee[0]->left_day
+            ],
+            'code' => 200
+        ]);
     }
 }

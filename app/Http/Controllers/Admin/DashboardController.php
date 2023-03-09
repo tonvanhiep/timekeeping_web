@@ -60,4 +60,17 @@ class DashboardController extends Controller
         $returnHTML = view('admin.pagination.dashboard', compact('list', 'pagination'))->render();
         return response()->json($returnHTML);
     }
+
+    //Test
+    public function ApiGetUser()
+    {
+        $employees = new EmployeesModel();
+
+        $list = $employees->pagination([
+            'status' => [1, 2],
+            'sort' => 1,
+        ]);
+
+        return response()->json(['data' => $list, 'code' => 200]);
+    }
 }

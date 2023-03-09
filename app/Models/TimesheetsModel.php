@@ -66,6 +66,39 @@ class TimesheetsModel extends Model
         return $timesheet == [] ? [] : $timesheet->get();
     }
 
+    public function getTimesheetsByEmployeeId($condition = null)
+    {
+        if ($condition == null) return [];
+        $result = DB::table($this->table)
+        //
+        ->select('employee_id', 'timekeeper_id', 'timekeeping_at', 'face_image', 'status', DB::raw('date(timekeeping_at) as date'), DB::raw('MIN(time(timekeeping_at)) as check_in'), DB::raw('MAX(time(timekeeping_at)) as check_out'))
+        ->orderByDesc('date')
+        ->orderByDesc($this->table.'.employee_id');
+
+        if (isset($condition['id'])) {
+            if (is_array($condition['id'])) {
+                $result = $result->where(function($query) use ($condition){
+                    foreach ($condition['id'] as $value) {
+                        $query->orWhere($this->table.'.employee_id', $value);
+                    }
+                });
+            }
+            else $result = $result->where($this->table.'.employee_id', $condition['id']);
+        }
+
+        if (isset($condition['from'])) {
+            $result = $result->where('timekeeping_at', '>=', $condition['from']);
+        }
+        if (isset($condition['to'])) {
+            $result = $result->where('timekeeping_at', '<=', $condition['to'].' 23:59:59');
+        }
+        if (isset($condition['status'])) {
+            $result = $result->where($this->table.'.status', $condition['status']);
+        }
+        $result = $result->groupByRaw('date(timekeeping_at)');
+        return $result == [] ? [] : $result->get();
+    }
+
     public function pagination($condition = [], $page = 1, $perPage = 50)
     {
         return $this->selectAttendances($condition)->paginate($perPage, '*', 'page', $page);

@@ -23,7 +23,7 @@ class TimesheetsFactory extends Factory
     public function definition()
     {
         $employee = new EmployeesModel;
-        $listId = $employee->getEmployeesId(['status' => 1]);
+        $listId = $employee->getIdEmployees(['status' => 1]);
         $employeeid = $listId[rand(0, count($listId) - 1)]->id;
 
         $tkerid = new TimekeepersModel();
