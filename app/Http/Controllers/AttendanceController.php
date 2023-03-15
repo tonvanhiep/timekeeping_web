@@ -108,6 +108,8 @@ class AttendanceController extends Controller
         ]);
         $timesheets = $timesheets->getTimesheetsByEmployeeId([
             'id' => Auth::user()->employee_id,
+            'from' => date('Y-m').'-1',
+            'to' => date('Y-m-d'),
             'status' => 1
         ]);
         return response()->json([

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\EmployeesModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -45,8 +46,11 @@ class AuthController extends Controller
 
     public function ApiGetInfo(Request $request)
     {
-        $user = Auth::user();
+        $auth = Auth::user();
+        $user = new EmployeesModel();
 
-        return response()->json(['data' => $user, 'code' => 200]);
+        $result = $user->getEmployees(['id' => $auth->employee_id]);
+
+        return response()->json(['data' => $result, 'code' => 200]);
     }
 }
