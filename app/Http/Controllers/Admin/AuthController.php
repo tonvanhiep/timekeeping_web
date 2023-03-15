@@ -31,8 +31,19 @@ class AuthController extends Controller
     public function ApiCheckLogin(Request $request) {
         if (Auth::attempt(['email' => $request->name, 'password' => $request->password])) {
             $user = Auth::user();
+            $info = new EmployeesModel();
+
+            $info = $info->getEmployees(['id' => $user->employee_id]);
             $token = $user->createToken('face_recognition')->accessToken;
-            return response()->json(['message' => 'Login successful', 'code' => 200, 'token' => $token]);
+            return response()->json([
+                'message' => 'Login successful',
+                'code' => 200,
+                'token' => $token,
+                'email' => $user->email,
+                'avatar' => $info[0]->avatar,
+                'first_name' => $info[0]->first_name,
+                'last_name' => $info[0]->last_name
+            ]);
         }
         return response()->json(['message' => 'Login fail', 'code' => 501]);
     }
